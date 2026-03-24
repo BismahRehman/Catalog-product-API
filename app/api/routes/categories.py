@@ -13,38 +13,27 @@ router = APIRouter(prefix= "/category",tags=["categories"])
 
 @router.post("/categories",response_model=CategoriesResponse)
 async def add_categories_root(category_data:CategorySchema ,db=Depends(get_db),current_user: str = Depends(get_current_user)):
-
    category = create_category(category_data,db)
-
    await delete_cache("categories:list")
-
    return category
 
 @router.put("/categories/{category_id}",response_model=CategoriesResponse)
 async def update_categories_root(category_id:int,category_data:CategorySchema , db=Depends(get_db),current_user: str = Depends(get_current_user)):
-
    category = update_category(category_data,category_id,db)
-
    await delete_cache("categories:list")
    await delete_cache(f"categories:{category_id}")
    await delete_cache(f"categories:{category_id}:products")
-
    return category
 
 @router.get("/categories",response_model=List[CategoriesResponse])
 async def all_categories(db=Depends(get_db)):
-
     cache_key = "categories:list"
     cached = await get_cache(cache_key)
     if cached:
         return cached
-
     categories = list_categories(db)
-
     categories_data = jsonable_encoder([CategoriesResponse.from_orm(c) for c in categories])
-
     await set_cache(cache_key,categories_data, expire=60)
-
     return categories_data
 
 @router.get("/categories/{category_id}",response_model=CategoriesResponse)
