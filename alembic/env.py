@@ -18,11 +18,19 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
+<<<<<<< HEAD
 from database import Base
 from app.models import user,product,category
 
 target_metadata = Base.metadata
 
+=======
+from  database import Base
+from app.models import  user, product, category
+target_metadata = Base.metadata
+
+
+>>>>>>> master
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
@@ -68,7 +76,11 @@ def run_migrations_online() -> None:
 
     with connectable.connect() as connection:
         context.configure(
+<<<<<<< HEAD
             connection=connection, target_metadata=target_metadata,  render_as_batch=True
+=======
+            connection=connection, target_metadata=target_metadata
+>>>>>>> master
         )
 
         with context.begin_transaction():

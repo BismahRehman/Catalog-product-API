@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from fastapi import HTTPException
 
 from app.models.category import Category
@@ -54,3 +55,6 @@ def product_categories(category_id,db):
         raise HTTPException(status_code=400, detail="Category does not exist")
 
     return existing_category.products
+=======
+
+>>>>>>> master

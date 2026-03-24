@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from fastapi import Depends, HTTPException
 from jose import JWTError, jwt
 from starlette import status
@@ -7,12 +8,17 @@ from database import SessionLocal
 
 from fastapi.security import OAuth2PasswordBearer, HTTPBearer, HTTPAuthorizationCredentials
 
+=======
+from database import SessionLocal
+
+>>>>>>> master
 
 def get_db():
     db = SessionLocal()
     try:
         yield db
     finally:
+<<<<<<< HEAD
         db.close()
 
 
@@ -47,3 +53,6 @@ def get_current_user(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid token"
         )
+=======
+        db.close()
+>>>>>>> master
